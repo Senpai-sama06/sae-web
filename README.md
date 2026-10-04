@@ -34,36 +34,25 @@ For an informational team site, prioritize the about section, verified team
 members/roles, projects, official social links, contact details, and photos.
 Keep blogs only if the team intends to maintain them.
 
-At inspection, this folder had no Git repository, remote, deployment workflow,
-or custom-domain configuration. An existing remote repository or deployment
-could not be verified without its account or URL.
+## GitHub Pages deployment
 
-## Publish on GitHub Pages
+- Repository: <https://github.com/Senpai-sama06/sae-web>
+- Website: <https://senpai-sama06.github.io/sae-web/>
+- Deployment runs: <https://github.com/Senpai-sama06/sae-web/actions/workflows/pages.yml>
 
-1. Create an empty GitHub repository under the intended team account or
-   organization. A public repository supports GitHub Pages on GitHub Free.
-2. From this folder, initialize and push the site. Replace `OWNER` and
-   `REPOSITORY` with the actual GitHub account and repository names:
+GitHub Pages uses **GitHub Actions** as its publishing source. The workflow
+in `.github/workflows/pages.yml` deploys on every push to `main` and can also
+be run manually from the Actions tab.
 
-   ```bash
-   git init -b main
-   git add index.html blogs.html gallery.html css js assets README.md .nojekyll
-   git commit -m "Add static SAE team website"
-   git remote add origin https://github.com/OWNER/REPOSITORY.git
-   git push -u origin main
-   ```
+The workflow copies the HTML pages, CSS, JavaScript, assets, and `.nojekyll`
+into a staging folder, uploads it, and deploys it to Pages. No build tool or
+custom secret is required. If you add another page or top-level asset folder,
+include it in the workflow's copy step.
 
-3. In the repository, open **Settings > Pages**. Select **Deploy from a branch**,
-   branch **main**, and folder **/(root)**, then save.
-4. Wait for the Pages deployment to succeed. Use the published URL shown in
-   Pages settings. Normally it is `https://OWNER.github.io/REPOSITORY/`.
-5. Open all three pages at the published URL and check navigation, images,
-   official links, and the mobile menu.
-
-The `.nojekyll` file tells Pages to serve the static files without Jekyll
-processing. Keep site asset and navigation paths relative, as they are now,
-so they work under the repository URL. Subsequent pushes to the publishing
-branch automatically publish updates.
+Keep navigation and asset paths relative so they work under `/sae-web/`.
+After pushing changes, wait for the deployment run to succeed and check the
+published pages. Pages settings are at
+<https://github.com/Senpai-sama06/sae-web/settings/pages>.
 
 References:
 - [About GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
